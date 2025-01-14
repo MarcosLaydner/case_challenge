@@ -2,6 +2,7 @@ import databases
 
 from contextlib import asynccontextmanager
 from sqlalchemy import MetaData, create_engine
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from ..config.environment import get_settings
 
@@ -21,6 +22,8 @@ metadata = MetaData(
         "pk": "pk_%(table_name)s",
     }
 )
+
+engine = create_engine(SQLALCHEMY_DATABASE_URL, echo=True)
 
 @asynccontextmanager
 async def database_context():
@@ -42,6 +45,9 @@ def init_database() -> None:
     global database
     database = databases.Database(SQLALCHEMY_DATABASE_URL)
 
+Base = declarative_base()
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+Base.metadata.create_all(bind=engine)
 
 # def init_test_database() -> None:
 #     import moov.infra.db.postgres.models

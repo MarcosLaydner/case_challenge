@@ -1,7 +1,7 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
-from ....infra.db.database import Base
+from ....infra.db.database import Base, engine
 
 
 class User(Base):
@@ -11,3 +11,5 @@ class User(Base):
     email = Column(String, unique=True, index=True)
     name = Column(String)
     is_active = Column(Boolean, default=True)
+
+Base.metadata.create_all(engine)
