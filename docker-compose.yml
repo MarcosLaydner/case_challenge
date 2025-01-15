@@ -6,9 +6,13 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - app
+      - /app
     ports:
-      - "8000:8000"
+      - "8001:8000"
+    environment:
+      - DB_HOST=localhost
+      - DB_PASSWORD=case_challenge
+      - DB_PORT=5432
   db:
     image: postgres:14.2-alpine
     environment:

@@ -1,8 +1,9 @@
-FROM python:3.9
+FROM python:3.11
 
 WORKDIR /app
 
 ADD requirements.txt requirements.txt
+ADD .env .env
 
 RUN python -m venv /env \
     && /env/bin/pip install --upgrade pip \
@@ -13,7 +14,7 @@ RUN apt-get update && apt-get install -y apt-transport-https ca-certificates cur
     echo "deb https://packages.doppler.com/public/cli/deb/debian any-version main" | tee /etc/apt/sources.list.d/doppler-cli.list && \
     apt-get update
 
-ADD . /app
+ADD . /case_challenge
 
 ENV VIRTUAL_ENV /env
 ENV PATH /env/bin:$PATH

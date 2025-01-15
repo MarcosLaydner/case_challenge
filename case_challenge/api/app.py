@@ -36,7 +36,6 @@ def init_databases() -> FastAPI:
 
 def init_app() -> FastAPI:
     app = create_instance()
-    init_databases()
     return register_routers(app)
 
 

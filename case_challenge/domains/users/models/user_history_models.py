@@ -5,16 +5,15 @@ class UserHistoryBase(BaseModel):
     email: str
 
 
-class UserHistoryCreate(UserHistoryBase):
+class UserHistoryData(UserHistoryBase):
     user_id: int
     name: str
     action: str
     effective_date: datetime
 
 
-class UserHistory(UserHistoryBase):
+class UserHistory(UserHistoryData):
     id: int
-    is_active: bool
     
     class Config:
         from_attributes = True

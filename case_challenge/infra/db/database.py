@@ -10,6 +10,7 @@ SETTINGS = get_settings()
 
 print(SETTINGS)
 SQLALCHEMY_DATABASE_URL = f"postgresql://{SETTINGS.DB_USER}:{SETTINGS.DB_PASSWORD}@{SETTINGS.DB_HOST}:{SETTINGS.DB_PORT}/{SETTINGS.DB}"
+SQLALCHEMY_TEST_DATABASE_URL = f"postgresql://{SETTINGS.DB_USER}:{SETTINGS.DB_PASSWORD}@{SETTINGS.DB_HOST}:{SETTINGS.DB_PORT}/{SETTINGS.TEST_DB}"
 
 database = databases.Database(SQLALCHEMY_DATABASE_URL)
 
@@ -41,13 +42,12 @@ async def disconnect_database():
 
 
 def init_database() -> None:
-    metadata.bind = create_engine(SQLALCHEMY_DATABASE_URL)
+    metadata.bind = engine
     global database
     database = databases.Database(SQLALCHEMY_DATABASE_URL)
 
 Base = declarative_base()
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-Base.metadata.create_all(bind=engine)
 
 # def init_test_database() -> None:
 #     import moov.infra.db.postgres.models
