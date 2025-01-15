@@ -23,7 +23,6 @@ def _configure_initial_settings() -> Callable[[], Settings]:
 
     env_values['WEB_SERVER_PORT'] = int(env_values['WEB_SERVER_PORT'])
 
-    print(type(env_values['WEB_SERVER_PORT']))    
     settings = Settings(**env_values)
 
 

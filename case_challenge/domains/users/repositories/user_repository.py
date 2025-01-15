@@ -4,21 +4,14 @@ from sqlalchemy.orm import Session
 from case_challenge.domains.users.models.user_models import UserCreate
 
 
-from ..schemas.user_schemas import User as Model
+from ..schemas.user_schemas import User as Schema
 from case_challenge.infra.db.database import SessionLocal
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 
-# def get_user(db: Session, user_id: int):
-#   return db.query(models.User).filter(models.User.id == user_id).first()
-
-
+def get_user(user_id: int):
+  db = SessionLocal()
+  return db.query(Schema).filter(Schema.id == user_id).first()
 
 
 # def get_user_by_email(db: Session, email: str):
@@ -31,12 +24,13 @@ def get_db():
 #   return db.query(models.User).offset(skip).limit(limit).all()
 
 
-def create_user(user: UserCreate):
+def create(user: UserCreate):
     db = SessionLocal()
-    db_user = Model(
+    db_user = Schema(
         email=user.email, 
         name=user.name
-        )
+    )
+
     db.add(db_user)
     db.commit()
     db.refresh(db_user)

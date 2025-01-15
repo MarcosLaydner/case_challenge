@@ -20,4 +20,4 @@ ENV PATH /env/bin:$PATH
 
 EXPOSE 8000
 
-CMD uvicorn app.main:app
+CMD python case_challenge/main.py
