@@ -4,7 +4,7 @@
 ### For running the project on a docker container:
 * Docker
 ### For running the project on the terminal, a virual enviroment is recommended:
-* Python3
+* Python3.11
 * Virtualenv
 * [pyenv](https://github.com/pyenv/pyenv)
 * [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv)
@@ -60,3 +60,12 @@ then, use docker to run and create the databases for dev and testing
 ```
 With the postgres container up, you can you can use `make run` to run the application, and access the docs in 'http://localhost:8000/docs#/'
 To run tests, run `make test`
+
+## Known problems / Shortcomings (Things I would improve in a real scenario/ given more time):
+1. While I created different layers with their own responsabilities, I feel like the repositories could use more abstraction, like creating an interface to be implemented by the respective repositories. This would make changing orms easier, and better decouple the databse layer with the application layer.
+2. The same applies for the test factories, which are coupled to the created repositories for the sake of time.
+3. The docker setup could be improve to remove the need to sometimes have to stop it then up again to work propperly.
+4. The application could use an activate route, that would reactivate accounts that have been previously deactivated.
+5. The application could use a validator for email. I did not implemented it as I saw it wasn't critical to any required functionality of the API, but in a real scenario it would be necessary.
+6. I opted to not have emails be unique as I also saw this as not critical.
+
