@@ -1,7 +1,19 @@
 version: '3.8'
 
 services:
+  db:
+    build: case_challenge/infra/db/docker/
+    environment:
+      - POSTGRES_MULTIPLE_DATABASES=db_case_challenge,test_case_challenge
+      - POSTGRES_USER=case_challenge
+      - POSTGRES_PASSWORD=case_challenge
+    volumes:
+      - db_data:/var/lib/postgresql/data/
+    ports:
+      - "5433:5432"
   api:
+    depends_on:
+      - db
     build:
       context: .
       dockerfile: Dockerfile
@@ -9,20 +21,5 @@ services:
       - /app
     ports:
       - "8001:8000"
-    environment:
-      - DB_HOST=localhost
-      - DB_PASSWORD=case_challenge
-      - DB_PORT=5432
-  db:
-    image: postgres:14.2-alpine
-    environment:
-      - POSTGRES_DB=case_challenge
-      - POSTGRES_USER=case_challenge
-      - POSTGRES_PASSWORD=case_challenge
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
-    ports:
-      - "5433:5432"
-
 volumes:
-  postgres_data:
+  db_data:

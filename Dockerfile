@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y apt-transport-https ca-certificates cur
     echo "deb https://packages.doppler.com/public/cli/deb/debian any-version main" | tee /etc/apt/sources.list.d/doppler-cli.list && \
     apt-get update
 
-ADD . /case_challenge
+ADD . /app
 
 ENV VIRTUAL_ENV /env
 ENV PATH /env/bin:$PATH

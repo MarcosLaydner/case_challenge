@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 
 from case_challenge.domains.users.schemas.user_schemas import User
 
-from ....infra.db.database import Base, engine
+from ....infra.db.sqlaclhemy.database import Base, get_engine
 
 
 class UserHistory(Base):
@@ -19,4 +19,4 @@ class UserHistory(Base):
     user = relationship('User', foreign_keys='UserHistory.user_id')
 
 
-Base.metadata.create_all(engine)
+Base.metadata.create_all(get_engine())

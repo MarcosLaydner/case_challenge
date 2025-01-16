@@ -2,16 +2,16 @@ from case_challenge.domains.users.models.user_history_models import UserHistory,
 
 
 from ..schemas.user_history_schemas import UserHistory as Schema
-from case_challenge.infra.db.database import SessionLocal
+from case_challenge.infra.db.sqlaclhemy.database import get_session_maker
 
 
 def find_by_user_id(user_id: int):
-  db = SessionLocal()
+  db = get_session_maker()
   return db.query(Schema).filter(Schema.user_id == user_id).order_by(Schema.effective_date.desc()).all()
 
 
 def create(history_data: UserHistoryData) -> UserHistory:
-    db = SessionLocal()
+    db = get_session_maker()
     db_user_history = Schema(
         user_id=history_data.user_id,
         email=history_data.email,

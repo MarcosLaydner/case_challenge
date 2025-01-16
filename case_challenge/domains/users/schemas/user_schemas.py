@@ -1,6 +1,6 @@
 from sqlalchemy import Boolean, Column, Integer, String
 
-from ....infra.db.database import Base, engine
+from ....infra.db.sqlaclhemy.database import Base, get_engine
 
 
 class User(Base):
@@ -11,4 +11,4 @@ class User(Base):
     name = Column(String)
     is_active = Column(Boolean, default=True)
 
-Base.metadata.create_all(engine)
+Base.metadata.create_all(get_engine())

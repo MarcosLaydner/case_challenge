@@ -4,14 +4,14 @@ from dotenv import dotenv_values, set_key
 
 class Settings:
     ENV: str = "development"
-    DB: str ='case_challenge'
+    DB: str ='db_case_challenge'
     TEST_DB: str ='test_case_challenge'
     DB_USER: str ='case_challenge'
     DB_PASSWORD: str ='TEST'
     DB_PORT: str ='5432'
     DB_HOST: str ='localhost'
     
-    WEB_SERVER_HOST: str = "db"
+    WEB_SERVER_HOST: str = "localhost"
     WEB_SERVER_PORT: int = 8000
     WEB_SERVER_RELOAD: bool = True
 
